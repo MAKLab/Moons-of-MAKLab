@@ -2,4 +2,7 @@
 
 You will need to install `node`.
 
-Run `npm start` to start the server. The first time this is run it will install the dependencies required. It may take some time. Once it has completed, browse to `http://127.0.0.1:8000/app`.
+Install the app dependencies:
+    `npm install`
+
+Follow the instructions on the [Chrome Developer](https://developer.chrome.com/apps/first_app#five) website to add the app to Chrome/Chromium and get it running.
