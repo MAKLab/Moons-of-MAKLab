@@ -8,5 +8,10 @@
       "scripts": ["js/background.js"]
     }
   },
-  "icons": {  }
+  "sockets": {
+    "udp": {
+      "send": ["*"],
+      "bind": ["*"]
+    }
+  }
 }

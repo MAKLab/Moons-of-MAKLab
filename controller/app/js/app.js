@@ -1,6 +1,7 @@
 var app = angular.module('app', [
   'ngRoute',
-  'controllers'
+  'controllers',
+  'factories'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -9,7 +10,11 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/rover.html',
     controller: 'RoverCtrl'
   }).
+  when('/rovers', {
+    templateUrl: 'partials/rover-list.html',
+    controller: 'RoverListCtrl'
+  }).
   otherwise({
-    redirectTo: '/rover'
+    redirectTo: '/rovers'
   });
 }]);
