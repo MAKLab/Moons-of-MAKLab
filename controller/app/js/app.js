@@ -1,6 +1,7 @@
 var app = angular.module('app', [
   'ngRoute',
-  'controllers'
+  'controllers',
+  'factories'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
