@@ -2,22 +2,21 @@
 
 /* RoverFactory */
 
-var factories = angular.module('factories', []);
+var factories = angular.module('factories', ['ngResource']);
 
 factories.constant('API_ENDPOINT', {
-  port: 5000,
   url: '/rover/api/v1.0'
 });
 
-factories.factory('Rover', [function RoverFactory($http, API_ENDPOINT) {
+factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http, API_ENDPOINT) {
 
-  function Rover() {
-    this.ip = '192.168.0.7'
+  function Rover(ipAddress) {
+    this.ip = ipAddress
   };
 
 
   Rover.prototype.cameraStream = function() {
-    return this.ip + ':5000/video_feed';
+    return 'http://' + this.ip + '/video_feed';
   };
 
   return Rover;
