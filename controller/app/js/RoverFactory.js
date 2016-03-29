@@ -21,30 +21,30 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
 
 
   // Motor commands
-  Rover.prototype.forwardCommand = function(distance) {
-    return { "command": "forward", "distance": distance };
+  Rover.prototype.forwardCommand = function(theDistance) {
+    return { command: "forward", distance: theDistance };
   };
 
-  Rover.prototype.backCommand = function(distance) {
-    return { "command": "back", "distance": distance };
+  Rover.prototype.backCommand = function(theDistance) {
+    return { command: "back", distance: theDistance };
   };
 
-  Rover.prototype.leftCommand = function(distance) {
-    return { "command": "left", "distance": distance };
+  Rover.prototype.leftCommand = function(theDistance) {
+    return { command: "left", distance: theDistance };
   };
 
-  Rover.prototype.rightCommand = function(distance) {
-    return { "command": "right", "distance": distance };
+  Rover.prototype.rightCommand = function(theDistance) {
+    return { command: "right", distance: theDistance };
   };
 
 
   // Pan/tilt commands
-  Rover.prototype.panCommand = function(distance) {
-    return { "command": "pan", "distance": distance };
+  Rover.prototype.panCommand = function(theDistance) {
+    return { command: "pan", distance: theDistance };
   };
 
-  Rover.prototype.tiltCommand = function(distance) {
-    return { "command": "tilt", "distance": distance };
+  Rover.prototype.tiltCommand = function(theDistance) {
+    return { command: "tilt", distance: theDistance };
   };
 
   Rover.prototype.centerCameraCommand = function() {
@@ -55,12 +55,23 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
 
   Rover.prototype.abort = function() {
     console.log("abort not implemented!");
+    return false;
   };
 
 
   Rover.prototype.sendCommands = function(commands) {
     console.log(this.ip, commands)
-    return true;
+
+    return $http.put('http://' + this.ip + API_ENDPOINT.url + '/instructions', JSON.stringify(commands))
+    .then( function(result) {
+
+      if (result.data.success) {
+        console.log('Commands acknowledged!');
+        return true;
+      }
+
+      return false;
+    });
   };
 
   return Rover;
