@@ -1,4 +1,17 @@
 <div>
   <h1>Rover</h1>
-  <img src="{{rover.cameraStream()}}">
+  <img src="{{cameraStream}}">
+  <br />
+  <button ng-click="forward(2)">Forward</button>
+  <button ng-click="right(2)">Right</button>
+  <button ng-click="back(2)">Back</button>
+  <button ng-click="left(2)">Left</button>
+  <br />
+  <button ng-click="tilt(10)">Tilt Up</button>
+  <button ng-click="pan(-10)">Pan Left</button>
+  <button ng-click="tilt(-10)">Tilt Down</button>
+  <button ng-click="pan(10)">Pan Right</button>
+  <br />
+  <button ng-click="sendCommands()">Send</button>
+  <button ng-click="abort()">Abort!</button>
 </div>
