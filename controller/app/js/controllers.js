@@ -1,5 +1,12 @@
 var controllers = angular.module('controllers', []);
 
+
+controllers.controller('RoverListCtrl', ['$scope', '$http', 'Rover',
+  function($scope, $http, Rover) {
+    
+  }]);
+
+
 controllers.controller('RoverCtrl', ['$scope', '$http', 'Rover',
   function ($scope, $http, Rover) {
     // The rover we are controlling
