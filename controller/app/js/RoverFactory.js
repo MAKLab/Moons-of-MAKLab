@@ -15,6 +15,22 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
   };
 
 
+  // Status
+  Rover.prototype.status = function() {
+    return $http.get('http://' + this.ip + API_ENDPOINT.url + '/status')
+    .then( function(result) {
+
+      if (result.data) {
+        console.log('Got status', result.data);
+        return true;
+      }
+
+      return false;
+    });
+  };
+
+
+  // Camera stream
   Rover.prototype.cameraStream = function() {
     return 'http://' + this.ip + '/video_feed';
   };

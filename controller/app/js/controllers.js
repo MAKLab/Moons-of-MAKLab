@@ -1,16 +1,57 @@
 var controllers = angular.module('controllers', []);
 
 
-controllers.controller('RoverListCtrl', ['$scope', '$http', 'Rover',
-  function($scope, $http, Rover) {
-    
+controllers.controller('RoverListCtrl', ['$scope', '$location', 'Rover',
+  function($scope, $location, Rover) {
+
+    var rovers = localStorage.getItem('rovers');
+    if (rovers != null) {
+      // We need to parse the rovers
+      rovers = JSON.parse(rovers);
+    } else {
+      // Create an empty array
+      rovers = [];
+    }
+
+    var saveRoverList = function() {
+      var roversString = JSON.stringify(rovers);
+      console.log("Saving rovers:", roversString);
+      localStorage.setItem('rovers', roversString);
+    };
+
+    $scope.ipAddress;
+
+    // The user hit the connect button
+    $scope.connectToRover = function() {
+      var rover = new Rover($scope.ipAddress);
+      if (rover.status()) {
+        var index = rovers.indexOf($scope.ipAddress);
+        if (index == -1) {
+          index = rovers.push($scope.ipAddress) - 1;
+          saveRoverList();
+        }
+
+        var roverUrl = '/rover/' + index;
+        $location.path(roverUrl);
+        return;
+      }
+    };
+
+
+    // Debug - clear rover addresses
+    $scope._clearAddresses = function() {
+      localStorage.removeItem('rovers');
+      rovers = [];
+    }
+
   }]);
 
 
-controllers.controller('RoverCtrl', ['$scope', '$http', 'Rover',
-  function ($scope, $http, Rover) {
+controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'Rover',
+  function ($scope, $routeParams, Rover) {
     // The rover we are controlling
-    var rover = new Rover('192.168.0.7:5000');
+    var roverAddresses = JSON.parse(localStorage.getItem('rovers'));
+    var rover = new Rover(roverAddresses[$routeParams.index]);
 
     // Toggles whether we send a list of commands, or direct commands
     var sendDirectCommands = true;

@@ -6,7 +6,7 @@ var app = angular.module('app', [
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-  when('/rover', {
+  when('/rover/:index', {
     templateUrl: 'partials/rover.html',
     controller: 'RoverCtrl'
   }).
