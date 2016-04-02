@@ -4,11 +4,13 @@ var controllers = angular.module('controllers', []);
 controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
   function($scope, $location, RoverList) {
 
+    var roverList = new RoverList(); // This isn't great, RoverList should be a singleton!
+
     $scope.ipAddress;
 
     // The user hit the connect button
     $scope.connectToRover = function() {
-      var index = RoverList.addRover($scope.ipAddress);
+      var index = roverList.addRover($scope.ipAddress);
       if (index == -1)
         return;
 
@@ -19,7 +21,7 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
     // Debug - clear rover addresses
     $scope._clearAddresses = function() {
-      RoverList.clearRovers();
+      roverList.clearRovers();
     }
 
   }]);
@@ -27,8 +29,10 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
 controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
   function ($scope, $routeParams, RoverList) {
+    var roverList = new RoverList(); // This isn't great, RoverList should be a singleton!
+
     // The rover we are controlling
-    var rover = RoverList.getRover($routeParams.index);
+    var rover = roverList.getRover($routeParams.index);
     if (rover == null) {
       console.log("There is no rover at this index!", $routeParams.index);
     }

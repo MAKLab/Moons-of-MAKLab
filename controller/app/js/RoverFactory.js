@@ -99,7 +99,7 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
 factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
 
   function RoverList() {
-    this.rovers = loadRovers();
+    this.rovers = this.loadRovers();
   }
 
 
@@ -126,7 +126,7 @@ factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
     var rover = new Rover(ipAddress);
     if (rover.status()) {
       index = this.rovers.push(ipAddress) - 1;
-      saveRovers();
+      this.saveRovers();
 
       return index;
     }
@@ -137,12 +137,12 @@ factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
 
   RoverList.prototype.clearRovers = function() {
     this.rovers = [];
-    saveRovers();
+    this.saveRovers();
   }
 
 
   RoverList.prototype.getRover = function(index) {
-    if (index < 0 || index >= this.rovers.length()) {
+    if (index < 0 || index >= this.rovers.length) {
       console.log("Rover index out of bounds");
       return null;
     }
