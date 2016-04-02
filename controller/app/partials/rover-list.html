@@ -2,12 +2,16 @@
   <h2>Rover List</h2>
 
   <div class="col-lg-6 col-lg-offset-3">
+    <ul ng-repeat="rover in rovers">
+      <li>{{rover}}</li>
+    </ul>
     <div class="input-group input-group-lg">
       <input type="text" class="form-control" placeholder="192.168.0.7:5000" ng-model="ipAddress">
       <span class="input-group-btn">
         <button class="btn btn-primary" type="button" ng-click="connectToRover()">Connect</button>
       </span>
     </div><!-- /input-group -->
+    <br />
+    <button class="btn btn-default btn-xs" ng-click="_clearAddresses()">Clear Addresses (debug)</button>
   </div><!-- /.col-lg-6 -->
-  <button class="btn btn-default btn-xs" ng-click="_clearAddresses()">Clear Addresses (debug)</button>
 </div>

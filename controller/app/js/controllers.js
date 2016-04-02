@@ -8,6 +8,8 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
     $scope.ipAddress;
 
+    $scope.rovers = roverList.rovers;
+
     // The user hit the connect button
     $scope.connectToRover = function() {
       var index = roverList.addRover($scope.ipAddress);
