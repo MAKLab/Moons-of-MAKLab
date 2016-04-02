@@ -93,3 +93,62 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
   return Rover;
 
 }]);
+
+
+
+factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
+
+  function RoverList() {
+    this.rovers = loadRovers();
+  }
+
+
+  RoverList.prototype.loadRovers = function() {
+    var storedRovers = localStorage.getItem('rovers');
+
+    if (storedRovers == null)
+      return [];
+
+    return JSON.parse(storedRovers);
+  }
+
+
+  RoverList.prototype.saveRovers = function() {
+    localStorage.setItem('rovers', JSON.stringify(this.rovers));
+  }
+
+
+  RoverList.prototype.addRover = function(ipAddress) {
+    var index = this.rovers.indexOf(ipAddress);
+    if (index != -1)
+      return index;
+
+    var rover = new Rover(ipAddress);
+    if (rover.status()) {
+      index = this.rovers.push(ipAddress) - 1;
+      saveRovers();
+
+      return index;
+    }
+
+    return -1;
+  }
+
+
+  RoverList.prototype.clearRovers = function() {
+    this.rovers = [];
+    saveRovers();
+  }
+
+
+  RoverList.prototype.getRover = function(index) {
+    if (index < 0 || index >= this.rovers.length()) {
+      console.log("Rover index out of bounds");
+      return null;
+    }
+
+    return new Rover(this.rovers[index]);
+  }
+
+  return RoverList;
+}]);
