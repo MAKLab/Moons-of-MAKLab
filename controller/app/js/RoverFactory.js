@@ -136,7 +136,7 @@ factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
 
 
   RoverList.prototype.clearRovers = function() {
-    this.rovers = [];
+    this.rovers.length = 0;
     this.saveRovers();
   }
 

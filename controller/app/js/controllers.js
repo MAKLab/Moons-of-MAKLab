@@ -11,10 +11,18 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
     $scope.rovers = roverList.rovers;
 
     // The user hit the connect button
-    $scope.connectToRover = function() {
+    $scope.connectToIP = function() {
       var index = roverList.addRover($scope.ipAddress);
       if (index == -1)
         return;
+
+      this.connectToRover(index);
+    };
+
+
+    // The user hit an existing rover button
+    $scope.connectToRover = function(index) {
+      // TODO: check the rover is online
 
       var roverUrl = '/rover/' + index;
       $location.path(roverUrl);
