@@ -1,6 +1,25 @@
 <div>
   <h2>Rover</h2>
-  <img src="{{cameraStream}}">
+  <div class="row">
+    <div class="col-lg-8">
+      <img src="{{cameraStream}}" width="600" height="400">
+    </div>
+    <div class="col-lg-4">
+      <div class="list-group">
+        <span class="list-group-item active">
+          Instructions
+        </span>
+        <span class="list-group-item disabled" ng-show="commandList.length == 0">
+          A list of instructions to send to the rover
+        </span>
+        <span class="list-group-item" ng-repeat="instruction in commandList">
+          <span class="badge">{{instruction.distance}}</span>
+          {{instruction.command}}
+        </span>
+      </div>
+      <button class="btn btn-default btn-block" type="submit" ng-click="sendCommands()">Send</button>
+    </div>
+  </div>
   <br />
   <button class="btn btn-default" ng-click="forward(2)">Forward</button>
   <button class="btn btn-default" ng-click="right(2)">Right</button>
@@ -12,6 +31,5 @@
   <button class="btn btn-default" ng-click="tilt(-10)">Tilt Down</button>
   <button class="btn btn-default" ng-click="pan(10)">Pan Right</button>
   <br />
-  <button class="btn btn-primary" ng-click="sendCommands()">Send</button>
-  <button class="btn btn-danger" ng-click="abort()">Abort!</button>
+  <button class="btn btn-danger" type="submit" ng-click="abort()">Abort!</button>
 </div>

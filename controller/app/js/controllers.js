@@ -48,10 +48,11 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
     }
 
     // Toggles whether we send a list of commands, or direct commands
-    var sendDirectCommands = true;
+    var sendDirectCommands = false;
 
     // The command list
     var commandList = [];
+    $scope.commandList = commandList;
 
     var addCommand = function(command) {
       if (sendDirectCommands) {
