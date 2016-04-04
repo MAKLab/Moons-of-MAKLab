@@ -59,6 +59,7 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
     var commandList = [];
     $scope.commandList = commandList;
 
+
     var addCommand = function(command) {
       if (sendDirectCommands) {
         commandList.push(command);
@@ -71,6 +72,7 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
         $('#distanceModal').modal('show');
       }
     };
+
 
     $scope.confirmDistance = function() {
       $('#distanceModal').modal('hide');
@@ -85,6 +87,7 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
       $scope.currentCommand = null;
       $scope.distance = 0;
     };
+
 
     // Provide the camera stream to the HTML
     $scope.cameraStream = rover.cameraStream();
