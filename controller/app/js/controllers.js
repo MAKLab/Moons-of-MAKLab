@@ -39,6 +39,7 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
 controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
   function ($scope, $routeParams, RoverList) {
+
     var roverList = new RoverList(); // This isn't great, RoverList should be a singleton!
 
     // The rover we are controlling
@@ -49,6 +50,10 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
 
     // Toggles whether we send a list of commands, or direct commands
     var sendDirectCommands = false;
+
+    // The command currently being edited
+    $scope.currentCommand = null;
+    $scope.distance = 0;
 
     // The command list
     var commandList = [];
@@ -62,8 +67,23 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
           commandList.length = 0;
 
       } else {
-        commandList.push(command);
+        $scope.currentCommand = command;
+        $('#distanceModal').modal('show');
       }
+    };
+
+    $scope.confirmDistance = function() {
+      $('#distanceModal').modal('hide');
+
+      if ($scope.currentCommand == null)
+        return;
+
+      var currentCommand = $scope.currentCommand;
+      currentCommand.distance = $scope.distance;
+      commandList.push(currentCommand);
+
+      $scope.currentCommand = null;
+      $scope.distance = 0;
     };
 
     // Provide the camera stream to the HTML

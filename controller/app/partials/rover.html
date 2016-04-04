@@ -1,5 +1,26 @@
 <div>
   <h2>Rover</h2>
+  <!-- Modal -->
+  <div class="modal fade" id="distanceModal" tabindex="-1" role="dialog" aria-labelledby="distanceModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="distanceModalLabel">Distance</h4>
+        </div>
+        <div class="modal-body">
+          {{currentCommand.command}}
+          <input type="text" class="form-control" ng-model="distance">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="confirmDistance()">Add command</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video stream and instructions -->
   <div class="row">
     <div class="col-lg-8">
       <img src="{{cameraStream}}" width="600" height="400">
@@ -20,6 +41,8 @@
       <button class="btn btn-default btn-block" type="submit" ng-click="sendCommands()">Send</button>
     </div>
   </div>
+
+  <!-- Buttons -->
   <br />
   <button class="btn btn-default" ng-click="forward(2)">Forward</button>
   <button class="btn btn-default" ng-click="right(2)">Right</button>
@@ -30,6 +53,4 @@
   <button class="btn btn-default" ng-click="pan(-10)">Pan Left</button>
   <button class="btn btn-default" ng-click="tilt(-10)">Tilt Down</button>
   <button class="btn btn-default" ng-click="pan(10)">Pan Right</button>
-  <br />
-  <button class="btn btn-danger" type="submit" ng-click="abort()">Abort!</button>
 </div>
