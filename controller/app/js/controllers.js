@@ -4,15 +4,13 @@ var controllers = angular.module('controllers', []);
 controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
   function($scope, $location, RoverList) {
 
-    var roverList = new RoverList(); // This isn't great, RoverList should be a singleton!
-
     $scope.ipAddress;
 
-    $scope.rovers = roverList.rovers;
+    $scope.rovers = RoverList.rovers;
 
     // The user hit the connect button
     $scope.connectToIP = function() {
-      var index = roverList.addRover($scope.ipAddress);
+      var index = RoverList.addRover($scope.ipAddress);
       if (index == -1)
         return;
 
@@ -31,7 +29,7 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
     // Debug - clear rover addresses
     $scope._clearAddresses = function() {
-      roverList.clearRovers();
+      RoverList.clearRovers();
     }
 
   }]);
@@ -39,10 +37,9 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
 
 controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
   function ($scope, $routeParams, RoverList) {
-    var roverList = new RoverList(); // This isn't great, RoverList should be a singleton!
 
     // The rover we are controlling
-    var rover = roverList.getRover($routeParams.index);
+    var rover = RoverList.getRover($routeParams.index);
     if (rover == null) {
       console.log("There is no rover at this index!", $routeParams.index);
     }
@@ -50,9 +47,14 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
     // Toggles whether we send a list of commands, or direct commands
     var sendDirectCommands = false;
 
+    // The command currently being edited
+    $scope.currentCommand = null;
+    $scope.distance = 0;
+
     // The command list
     var commandList = [];
     $scope.commandList = commandList;
+
 
     var addCommand = function(command) {
       if (sendDirectCommands) {
@@ -62,9 +64,26 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
           commandList.length = 0;
 
       } else {
-        commandList.push(command);
+        $scope.currentCommand = command;
+        $('#distanceModal').modal('show');
       }
     };
+
+
+    $scope.confirmDistance = function() {
+      $('#distanceModal').modal('hide');
+
+      if ($scope.currentCommand == null)
+        return;
+
+      var currentCommand = $scope.currentCommand;
+      currentCommand.distance = $scope.distance;
+      commandList.push(currentCommand);
+
+      $scope.currentCommand = null;
+      $scope.distance = 0;
+    };
+
 
     // Provide the camera stream to the HTML
     $scope.cameraStream = rover.cameraStream();
