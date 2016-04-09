@@ -35,8 +35,8 @@ controllers.controller('RoverListCtrl', ['$scope', '$location', 'RoverList',
   }]);
 
 
-controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList', 'GamePad',
-  function ($scope, $routeParams, RoverList) {
+controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList', 'Gamepad',
+  function ($scope, $routeParams, RoverList, Gamepad) {
 
     // The rover we are controlling
     var rover = RoverList.getRover($routeParams.index);
