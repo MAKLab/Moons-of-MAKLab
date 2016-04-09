@@ -1,7 +1,8 @@
 var app = angular.module('app', [
   'ngRoute',
   'controllers',
-  'factories'
+  'factories',
+  'GamePadApi'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
