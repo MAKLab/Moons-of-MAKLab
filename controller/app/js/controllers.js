@@ -47,6 +47,11 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
     // Toggles whether we send a list of commands, or direct commands
     var sendDirectCommands = false;
 
+    
+    $scope.DistanceTypes = { NotSet: 1, Time: 2, Angle: 3 };
+    $scope.distanceType = $scope.DistanceTypes.NoteSet;
+
+
     // The command currently being edited
     $scope.currentCommand = null;
     $scope.distance = 0;
@@ -60,8 +65,10 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
       if (sendDirectCommands) {
         commandList.push(command);
 
-        if (rover.sendCommands(commandList))
+        if (rover.sendCommands(commandList)) {
           commandList.length = 0;
+	  $scope.distaceType = $scope.DistanceTypes.NotSet;
+	}
 
       } else {
         $scope.currentCommand = command;
@@ -77,11 +84,16 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
         return;
 
       var currentCommand = $scope.currentCommand;
-      currentCommand.distance = $scope.distance;
+      //if ($scope.distanceType == $scope.DistanceTypes.Time)
+      //  currentCommand.distance = $scope.distance * 10;
+      //else
+        currentCommand.distance = $scope.distance;
+      
       commandList.push(currentCommand);
 
       $scope.currentCommand = null;
       $scope.distance = 0;
+      $scope.distaceType = $scope.DistanceTypes.NotSet;
     };
 
 
@@ -91,32 +103,39 @@ controllers.controller('RoverCtrl', ['$scope', '$routeParams', 'RoverList',
 
     // Motor controls
     $scope.forward = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Time;
       addCommand(rover.forwardCommand(distance));
     };
 
     $scope.back = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Time;
       addCommand(rover.backCommand(distance));
     };
 
     $scope.left = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Angle;
       addCommand(rover.leftCommand(distance));
     };
 
     $scope.right = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Angle;
       addCommand(rover.rightCommand(distance));
     };
 
 
     // Pan/Tilt controls
     $scope.pan = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Angle;
       addCommand(rover.panCommand(distance));
     };
 
     $scope.tilt = function(distance) {
+      $scope.distaceType = $scope.DistanceTypes.Angle;
       addCommand(rover.tiltCommand(distance));
     };
 
     $scope.centerCamera = function() {
+      $scope.distaceType = $scope.DistanceTypes.Angle;
       addCommand(rover.centerCameraCommand());
     };
 

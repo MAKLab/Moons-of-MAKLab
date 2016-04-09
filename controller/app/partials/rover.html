@@ -42,14 +42,16 @@
 
   <!-- Buttons -->
   <div class="row">
-    <button class="btn btn-default" ng-click="forward(2)">Forward</button>
-    <button class="btn btn-default" ng-click="right(2)">Right</button>
-    <button class="btn btn-default" ng-click="back(2)">Back</button>
-    <button class="btn btn-default" ng-click="left(2)">Left</button>
+    <div class="d-pad">
+      <button class="btn btn-default d up" ng-click="forward(2)">Forward</button>
+      <button class="btn btn-default d right" ng-click="right(2)">Right</button>
+      <button class="btn btn-default d down" ng-click="back(2)">Back</button>
+      <button class="btn btn-default d left" ng-click="left(2)">Left</button>
+    </div>
   </div>
   <div class="row">
     <button class="btn btn-default" ng-click="tilt(10)">Tilt Up</button>
     <button class="btn btn-default" ng-click="pan(-10)">Pan Left</button>
-    <button class="btn btn-default" ng-click="tilt(-10)">Tilt Down</button>
-    <button class="btn btn-default" ng-click="pan(10)">Pan Right</button>
+    <button cass="btn btn-default" ng-click="tilt(-10)">Tilt Down</button>
+    <button cslass="btn btn-default" ng-click="pan(10)">Pan Right</button>
   </div>
