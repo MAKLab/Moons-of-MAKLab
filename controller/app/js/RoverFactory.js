@@ -96,7 +96,7 @@ factories.factory('Rover', ['$http', 'API_ENDPOINT', function RoverFactory($http
 
 
 
-factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
+factories.factory('RoverList', ['Rover', function RoverListFactory(Rover) {
 
   function RoverList() {
     this.rovers = this.loadRovers();
@@ -150,5 +150,6 @@ factories.factory('RoverList', ['Rover', function RoverFactory(Rover) {
     return new Rover(this.rovers[index]);
   }
 
-  return RoverList;
+  var theRoverList = new RoverList();
+  return theRoverList;
 }]);
