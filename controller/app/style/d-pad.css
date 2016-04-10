@@ -1,23 +1,28 @@
 .d-pad {
-/*  width: 3em;
-  height: 3em; */
+  width: 237px;
+  height: 102px;
   position: relative;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .d {
-/*  width: 1em;
-  height: 1em;
-  background: #1d2323; */
+  width: 79px;
+  height: 34px;
   position: absolute;
-  border-top: 0.05em solid #7b9191;
-  border-bottom: 0.05em solid black;
 }
-.d:hover, .d:active {
-  background: #404d4d;
+
+.center {
+  left: 79px;
+  top: 34px;
+  border-radius: 0 0 0 0;
+  padding: 6px 12px;
+  border-color: #CCC;
+  text-align: center;
 }
 
 .up {
-  left: 1em;
+  left: 79px;
   top: 0;
   border-radius: .25em .25em 0 0;
 }
@@ -26,7 +31,7 @@
 }
 
 .right {
-  top: 1em;
+  top: 34px;
   right: 0;
   border-radius: 0 .25em .25em 0;
 }
@@ -36,7 +41,7 @@
 }
 
 .down {
-  left: 1em;
+  left: 79px;
   bottom: 0;
   border-radius: 0 0 .25em .25em;
 }
@@ -45,7 +50,7 @@
 }
 
 .left {
-  top: 1em;
+  top: 34px;
   left: 0;
   border-radius: .25em 0 0 .25em;
 }

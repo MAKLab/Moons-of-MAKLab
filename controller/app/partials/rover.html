@@ -42,16 +42,22 @@
 
   <!-- Buttons -->
   <div class="row">
+    <div class="col-md-4 col-md-offset-2">
     <div class="d-pad">
+      <span class="d center">Motors</span>
       <button class="btn btn-default d up" ng-click="forward(2)">Forward</button>
       <button class="btn btn-default d right" ng-click="right(2)">Right</button>
       <button class="btn btn-default d down" ng-click="back(2)">Back</button>
       <button class="btn btn-default d left" ng-click="left(2)">Left</button>
     </div>
-  </div>
-  <div class="row">
-    <button class="btn btn-default" ng-click="tilt(10)">Tilt Up</button>
-    <button class="btn btn-default" ng-click="pan(-10)">Pan Left</button>
-    <button cass="btn btn-default" ng-click="tilt(-10)">Tilt Down</button>
-    <button cslass="btn btn-default" ng-click="pan(10)">Pan Right</button>
+    </div>
+    <div class="col-md-4">
+    <div class="d-pad">
+      <span class="d center">Camera</span>
+      <button class="btn btn-default d up" ng-click="tilt(10)">Tilt Up</button>
+      <button class="btn btn-default d right" ng-click="pan(-10)">Pan Left</button>
+      <button class="btn btn-default d down" ng-click="tilt(-10)">Tilt Down</button>
+      <button class="btn btn-default d left" ng-click="pan(10)">Pan Right</button>
+    </div>
+    </div>
   </div>
